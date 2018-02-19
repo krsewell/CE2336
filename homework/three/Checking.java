@@ -15,5 +15,24 @@ import homework.three.Account;
 
 public class Checking extends Account {
 
+  public Checking(int balance, double rate) {
+    super(balance,rate);
+
+  }
+
+  @Override
+  public void withdraw(int value) {
+    try {
+      super.withdraw(value); //this is kind of built into the base class function
+    } catch (IllegalArgumentException e) {
+      super.overdraft();
+    } 
+  }
+  
+  @Override
+  public void monthlyProc() {
+    this.addServiceCharge(500 + (this.getWithdraw()*10));
+    super.monthlyProc();
+  }
 
 }

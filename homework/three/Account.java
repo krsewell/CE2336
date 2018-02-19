@@ -17,6 +17,7 @@ public class Account {
    * Balance represented by integer value. 10.00 is 1000.
    */
   private int _balance;
+  private int _balance_beg;
   private int _numberOfDeposit;
   private int _numberOfWithdraw;
   private double _rateAnnualInterest;
@@ -33,6 +34,10 @@ public class Account {
     return this._balance;
   }
 
+  protected int getBeginBalance() {
+    return this._balance_beg;
+  }
+
   protected int getWithdraw() {
     return this._numberOfWithdraw;
   }
@@ -42,6 +47,7 @@ public class Account {
   ////////////////
   public Account(int balance, double rate) {
     this._balance = balance;
+    this._balance_beg = balance;
     this._rateAnnualInterest = rate;
   }
 
@@ -68,9 +74,15 @@ public class Account {
   public void monthlyProc() {
     this._balance -= this._serviceCharges;
     calcInt();
+    display();
+    this._balance_beg = this._balance;
     this._numberOfDeposit = 0;
     this._numberOfWithdraw = 0;
     this._serviceCharges = 0;
+  }
+
+  public void overdraft() {
+    this._balance -= 1500;
   }
 
   public void display() {
