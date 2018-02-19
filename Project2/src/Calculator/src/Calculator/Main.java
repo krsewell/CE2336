@@ -42,11 +42,11 @@ class Main {
       workingSet.stream()
                 .filter(e -> e != null)
                 .map(Main::format)
-                .forEach(bw::write);
+                .forEach(e -> write(e,bw));
 
     } catch (IOException e) {
+      System.out.print("Can not access file: ");
       System.out.println(e.getMessage());
-      System.out.println("Can not access file.");
       System.exit(1);
 
     } catch (InvalidPathException e) {
@@ -57,8 +57,18 @@ class Main {
     }
   } // main
 
-  private static String format(final Object[] objects) {
+  private static void write(String s, BufferedWriter bufferedWriter) {
+	  try {
+	    bufferedWriter.write(s,0,s.length());
+    } catch (IOException e) {
+	    System.out.print("Can not access file: ");
+	    System.out.println(e.getMessage());
+	    System.exit(1);
+    }
+  }
 
+  private static String format(final Object[] objects) {
+    return "TEMP\n";
   }
 
   private static Object[] compute(Object[] objects) {
