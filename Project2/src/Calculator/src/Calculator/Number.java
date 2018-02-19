@@ -32,6 +32,7 @@ class Number {
 	}
 
 
+
 	public static boolean isValid(final String e) {
     //tests for an integer/double
     final Pattern rgex = Pattern.compile("^-?\\d*\\.?\\d+$");
@@ -53,8 +54,11 @@ class Number {
 	
 	public boolean equals(Object obj) {
 		if (obj instanceof Number) {
-			return this._real_number == obj.get_real_number();
+			return this._real_number == ((Number)obj).get_real_number();
 		}
+
+		// unless an object that is unrelated this will never return.
+		return false;
 	}
 
 

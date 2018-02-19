@@ -74,7 +74,17 @@ public class ComplexNumber extends Number {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return (super.equals(obj) && this._imaginary_number == obj.get_imaginary_number());
-	}
+    if (obj instanceof ComplexNumber) {
+      return (super.equals(obj) && this._imaginary_number == ((ComplexNumber) obj).get_imaginary_number());
+    }
+
+    return false;
+  }
+
+  public double getMagnitude() {
+	  //defined as sqrt of x^2 + xi^2
+    return Math.sqrt((this.get_real_number() * this.get_real_number()) +
+            (this.get_imaginary_number() * this.get_imaginary_number() * -1.0));
+  }
 
 }
