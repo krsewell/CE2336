@@ -33,17 +33,13 @@ class Main {
     try (Stream<String> stream_in = Files.lines(input);
          BufferedWriter bw = Files.newBufferedWriter(output)) {
 
-      // We will hold our data in a list. Later we can parallelize for large workingSets with BlockingQueues
-      List<Object[]> workingSet = stream_in
-              .filter(e -> e.length() > 0)
+      // Data enters as stream from input file and terminates after written to output file.
+      stream_in
+              .filter(e -> e.length() > 0) //filter empty strings
               .map(String::trim)
               .filter(Main::checkToken)
               .map(Main::convertToken)
               .map(Main::compute)
-              .collect(toList());
-
-      //Format, then Output to file
-      workingSet.stream()
               .filter(e -> e[3] != null)  //if we get a result.
               .map(Main::format)
               .forEach(e -> write(e, bw));
@@ -79,8 +75,8 @@ class Main {
 
   private static Object[] compute(Object[] objects) {
     /*
-     *  Function actually just selects the corect operator function
-     *  to compute the result. see subfuctions for computations.
+     *  Function actually just selects the correct operator function
+     *  to compute the result. see sub-fuctions for computations.
      */
 
     if (objects[0].equals("+")) {
@@ -221,7 +217,7 @@ class Main {
     double y = b.get_real_number();
     double yi = b.get_imaginary_number();
 
-    //if a is complex cast and change xi.
+    //if a is complex, cast, and change xi.
     if (a instanceof ComplexNumber) {
       xi = ((ComplexNumber) a).get_imaginary_number();
     }
