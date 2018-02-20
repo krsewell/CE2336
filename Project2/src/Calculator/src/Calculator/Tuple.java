@@ -1,3 +1,14 @@
+/*
+ *  Copyright (C) Kristopher Sewell - All Rights Reserved
+ *  Written by Kristopher Sewell, Feb 2018
+ *
+ *  Name: Kristopher Sewell
+ *  NETID: kjs170430
+ *  Class: CE2336.002
+ *
+ *  File: ./calculator/Tuple.java
+ */
+
 package Calculator;
 
 public class Tuple {
